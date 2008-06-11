@@ -20,7 +20,6 @@ BuildArch: noarch
 %define _requires_exceptions Exporter::
 
 %description
-
 This module is an the AnyEvent manpage user, you need to make sure that you
 use and run a supported event loop.
 
