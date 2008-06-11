@@ -1,7 +1,7 @@
 
 %define realname   AnyEvent-BDB
 %define version    1.0
-%define release    %mkrel 1
+%define release    %mkrel 2
 
 Name:       perl-%{realname}
 Version:    %{version}
@@ -17,6 +17,7 @@ BuildRequires: perl-AnyEvent
 BuildRequires: perl-BDB >= 1.5
 
 BuildArch: noarch
+%define _requires_exceptions Exporter::
 
 %description
 
