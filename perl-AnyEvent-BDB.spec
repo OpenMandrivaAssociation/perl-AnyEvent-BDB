@@ -1,15 +1,15 @@
 
 %define realname   AnyEvent-BDB
-%define version    1.0
-%define release    %mkrel 3
+%define upstream_version    1.1
+%define release    %mkrel 1
 
 Name:       perl-%{realname}
-Version:    %{version}
+Version:    %perl_convert_version %{version}
 Release:    %{release}
 License:    GPL or Artistic
 Group:      Development/Perl
 Summary:    Truly asynchronous berkeley db access
-Source:     http://www.cpan.org/modules/by-module/AnyEvent/%{realname}-%{version}.tar.gz
+Source:     http://www.cpan.org/modules/by-module/AnyEvent/%{realname}-%{upstream_version}.tar.gz
 Url:        http://search.cpan.org/dist/%{realname}
 BuildRoot:  %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires: perl-devel
@@ -33,7 +33,7 @@ $AnyEvent::BDB::WATCHER'. Please notify the author of when and why you
 think this was necessary.
 
 %prep
-%setup -q -n %{realname}-%{version} 
+%setup -q -n %{realname}-%{upstream_version} 
 
 %build
 %{__perl} Makefile.PL INSTALLDIRS=vendor
