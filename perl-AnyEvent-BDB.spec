@@ -4,7 +4,7 @@
 %define release    %mkrel 1
 
 Name:       perl-%{realname}
-Version:    %perl_convert_version %{version}
+Version:    %perl_convert_version %{upstream_version}
 Release:    %{release}
 License:    GPL or Artistic
 Group:      Development/Perl
