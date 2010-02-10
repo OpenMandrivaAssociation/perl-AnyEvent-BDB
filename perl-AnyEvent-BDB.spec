@@ -1,23 +1,24 @@
+%define upstream_name    AnyEvent-BDB
+%define upstream_version 1.1
 
-%define realname   AnyEvent-BDB
-%define upstream_version    1.1
-%define release    %mkrel 1
+%define _requires_exceptions Exporter::
 
-Name:       perl-%{realname}
+Name:       perl-%{upstream_name}
 Version:    %perl_convert_version %{upstream_version}
-Release:    %{release}
+Release:    %mkrel 1
+
+Summary:    Truly asynchronous berkeley db access
 License:    GPL or Artistic
 Group:      Development/Perl
-Summary:    Truly asynchronous berkeley db access
-Source:     http://www.cpan.org/modules/by-module/AnyEvent/%{realname}-%{upstream_version}.tar.gz
-Url:        http://search.cpan.org/dist/%{realname}
-BuildRoot:  %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+Url:        http://search.cpan.org/dist/%{upstream_name}
+Source0:    http://www.cpan.org/modules/by-module/AnyEvent/%{upstream_name}-%{upstream_version}.tar.gz
+
 BuildRequires: perl-devel
 BuildRequires: perl-AnyEvent
 BuildRequires: perl-BDB >= 1.5
 
 BuildArch: noarch
-%define _requires_exceptions Exporter::
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}
 
 %description
 This module is an the AnyEvent manpage user, you need to make sure that you
@@ -33,14 +34,14 @@ $AnyEvent::BDB::WATCHER'. Please notify the author of when and why you
 think this was necessary.
 
 %prep
-%setup -q -n %{realname}-%{upstream_version} 
+%setup -q -n %{upstream_name}-%{upstream_version}
 
 %build
 %{__perl} Makefile.PL INSTALLDIRS=vendor
 %make
 
 %check
-make test
+%make test
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -54,6 +55,3 @@ rm -rf $RPM_BUILD_ROOT
 %doc README Changes META.yml
 %{_mandir}/man3/*
 %perl_vendorlib/*
-
-
-
