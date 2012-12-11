@@ -1,24 +1,27 @@
 %define upstream_name    AnyEvent-BDB
 %define upstream_version 1.1
 
+%if %{_use_internal_dependency_generator}
+%define __noautoreq 'perl\\(Exporter(.*)\\)'
+%else
 %define _requires_exceptions Exporter::
+%endif
 
-Name:       perl-%{upstream_name}
-Version:    %perl_convert_version %{upstream_version}
-Release:    %mkrel 3
+Name:		perl-%{upstream_name}
+Version:	%perl_convert_version %{upstream_version}
+Release:	4
 
-Summary:    Truly asynchronous berkeley db access
-License:    GPL or Artistic
-Group:      Development/Perl
-Url:        http://search.cpan.org/dist/%{upstream_name}
-Source0:    http://www.cpan.org/modules/by-module/AnyEvent/%{upstream_name}-%{upstream_version}.tar.gz
+Summary:	Truly asynchronous berkeley db access
+License:	GPL or Artistic
+Group:		Development/Perl
+Url:		http://search.cpan.org/dist/%{upstream_name}
+Source0:	http://www.cpan.org/modules/by-module/AnyEvent/%{upstream_name}-%{upstream_version}.tar.gz
 
-BuildRequires: perl-devel
-BuildRequires: perl-AnyEvent
-BuildRequires: perl-BDB >= 1.5
+BuildRequires:	perl-devel
+BuildRequires:	perl-AnyEvent
+BuildRequires:	perl-BDB >= 1.5
 
 BuildArch: noarch
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}
 
 %description
 This module is an the AnyEvent manpage user, you need to make sure that you
@@ -37,21 +40,50 @@ think this was necessary.
 %setup -q -n %{upstream_name}-%{upstream_version}
 
 %build
-%{__perl} Makefile.PL INSTALLDIRS=vendor
+perl Makefile.PL INSTALLDIRS=vendor
 %make
 
 %check
 %make test
 
 %install
-rm -rf $RPM_BUILD_ROOT
 %makeinstall_std
 
-%clean
-rm -rf $RPM_BUILD_ROOT
-
 %files
-%defattr(-,root,root)
 %doc README Changes META.yml
 %{_mandir}/man3/*
-%perl_vendorlib/*
+%{perl_vendorlib}/*
+
+
+%changelog
+* Wed Apr 18 2012 Götz Waschk <waschk@mandriva.org> 1.100.0-3mdv2012.0
++ Revision: 791642
+- yearly rebuild
+
+* Mon Apr 18 2011 Funda Wang <fwang@mandriva.org> 1.100.0-2
++ Revision: 654874
+- rebuild for updated spec-helper
+
+* Wed Feb 10 2010 Jérôme Quelin <jquelin@mandriva.org> 1.100.0-1mdv2011.0
++ Revision: 503922
+- tighten spec file
+
+* Sun Aug 02 2009 Götz Waschk <waschk@mandriva.org> 1.100.0-1mdv2010.0
++ Revision: 407571
+- new version
+- use perl version macro
+
+* Fri Aug 08 2008 Thierry Vignaud <tv@mandriva.org> 1.0-3mdv2009.0
++ Revision: 268363
+- rebuild early 2009.0 package (before pixel changes)
+- fix extra spacing at top of description
+
+* Wed Jun 11 2008 Götz Waschk <waschk@mandriva.org> 1.0-2mdv2009.0
++ Revision: 217900
+- make the package installable
+
+* Tue Jun 10 2008 Götz Waschk <waschk@mandriva.org> 1.0-1mdv2009.0
++ Revision: 217384
+- import perl-AnyEvent-BDB
+
+
